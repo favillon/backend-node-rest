@@ -5,9 +5,10 @@ const {dbConnection} = require('../database/config.bd')
 class Server {
 
     constructor(){
-        this.app  = express()
-        this.port = process.env.PORT_SERVER
-        this.path = '/api/'
+        this.app      = express()
+        this.port     = process.env.PORT_SERVER
+        this.path     = '/api/'
+        this.userAuth = this.path + 'auth'
         this.userPath = this.path + 'user'
 
         //BD
@@ -37,6 +38,7 @@ class Server {
     }
 
     routes(){
+        this.app.use(this.userAuth, require('../routes/auth.router'))
         this.app.use(this.userPath, require('../routes/user.router'))
     }
 

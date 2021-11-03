@@ -67,12 +67,25 @@ const  userPut = async (req, res = response)  => {
 }
 const userDelete  = async(req, res = response)  => {
     const {id} = req.params
-    const user = await User.findByIdAndUpdate(id, {state:false})
-    res.json(
-        {
-            msg : 'delete User Controller'
-        }
-    )
+    const uid = req.uid    
+    try {
+        const user = await User.findByIdAndUpdate(id, {state:false})
+        console.log("find user");
+        console.log(user);
+        return res.json(
+            {
+                msg : 'delete User Controller',
+                user,
+                uid
+            }
+        )    
+    } catch (error) {
+        console.log('error try catch userDelete') 
+        //console.log(error) 
+        return res.status(401).json({
+            msg : 'No fue posible eliminar '
+        }) 
+    }
 }
 
 module.exports = {
