@@ -1,0 +1,47 @@
+###
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email" : "fabian@test.com",
+    "password" : "123456789"
+}
+
+###
+POST http://localhost:3000/api/auth/google
+Content-Type: application/json
+
+{
+    "id_token" : "asdads"
+}
+
+
+###
+GET http://localhost:3000/api/category
+
+
+###
+GET http://localhost:3000/api/category/6189eea5ac74fc6d3c349a78
+
+###
+POST http://localhost:3000/api/category
+x-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTY1MGVmMDRjYzVkMjI5NGVlNzM0NTUiLCJpYXQiOjE2MzY0Mjg3MDIsImV4cCI6MTYzNjQzNTkwMn0.prxIqRCb1X9wn561E0wPK-QphGn_ZisXp1mEETXUecs
+Content-Type: application/json
+
+{
+    "name" : "Kumis"
+}
+
+###
+PUT http://localhost:3000/api/category/6189eea5ac74fc6d3c349a78
+x-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTY1MGVmMDRjYzVkMjI5NGVlNzM0NTUiLCJpYXQiOjE2MzY0Mjg3MDIsImV4cCI6MTYzNjQzNTkwMn0.prxIqRCb1X9wn561E0wPK-QphGn_ZisXp1mEETXUecs
+Content-Type: application/json
+
+{
+    "name" : "galleta"
+}
+
+###
+DELETE http://localhost:3000/api/category/6189eea5ac74fc6d3c349a78
+x-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTY1MGVmMDRjYzVkMjI5NGVlNzM0NTUiLCJpYXQiOjE2MzY0Mjg3MDIsImV4cCI6MTYzNjQzNTkwMn0.prxIqRCb1X9wn561E0wPK-QphGn_ZisXp1mEETXUecs
+Content-Type: application/json

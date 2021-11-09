@@ -1,10 +1,7 @@
 const { response, request } = require('express')
 
 const isAdmin = async(req = request, res = response, next) => {
-    console.log('isAdmin');
-    console.log(req.user);
     if (!req.user && req.user.role !== "ADMIN_ROLE") {
-        console.log('sin rol');
         return res.status(401).json({
             msg : 'Usuario sin privilegios'
         })
