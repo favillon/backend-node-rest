@@ -74,13 +74,14 @@ const postCategory = async (req = request, res = response) => {
         const category = new categoryModel(data)
         await category.save()
         
-        res.staus(201).json({
+        res.status(201).json({
             ok : true,
             msg : `Nueva categoria ${name}`,
         })
 
                
     } catch (error) {
+        console.log(error);
         res.json({
             ok : false,
             msg : 'postCategory catch',
