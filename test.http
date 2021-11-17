@@ -78,8 +78,6 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:3000/api/category/61956631db94b273da85db6a
+DELETE http://localhost:3000/api/product/61956631db94b273da85db6a
 x-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTY1MGVmMDRjYzVkMjI5NGVlNzM0NTUiLCJpYXQiOjE2MzcxODAyNDgsImV4cCI6MTYzNzE4NzQ0OH0.yRbl-s-gKMMZ1PYcSSZrj6vcBUJvwgYaM0Td08B73jU
 Content-Type: application/json
-
-61956631db94b273da85db6a
