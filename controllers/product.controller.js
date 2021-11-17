@@ -1,14 +1,14 @@
 const {response, request} = require('express');
-const categoryModel = require('../models/category.model');
+const productModel = require('../models/product.model');
 
-const getCategory = async(req = request, res = response)  => {
+const getProduct = async(req = request, res = response)  => {
     const {limit = 5, from = 0} = req.query
     const query = {state:true}
 
     try {
-        const [total, categories] = await Promise.all([
-            categoryModel.countDocuments(query),
-            categoryModel.find(query)
+        const [total, products] = await Promise.all([
+            productModel.countDocuments(query),
+            productModel.find(query)
             .populate('user','name')
                 .skip(Number(from))
                 .limit(Number(limit))
@@ -16,92 +16,69 @@ const getCategory = async(req = request, res = response)  => {
         res.json({
             msg : 'getCategory',
             total,
-            categories
+            products
         })
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            msg : 'getCategory catch '
+            msg : 'getProduct catch '
         })
     }
 }
 
 
-const getCategoryById = async (req = request, res = response) => {    
+const getProductById = async (req = request, res = response) => {    
     
     const {id} = req.params      
     try {
-        const category = await categoryModel
+        const product = await productModel
             .findById(id)
             .populate('user','name')
+            .populate('category','name')
        
         res.json({
             ok : true,
             msg : 'getCategoryById',
-            category
+            product
         })
 
                
     } catch (error) {
         res.json({
             ok : false,
-            msg : 'getCategoryById catch',
+            msg : 'getProductById catch',
            
         })
     }    
 }
 
-const postCategory = async (req = request, res = response) => {    
-
-    console.log(req.body);
-    const name = req.body.name.toUpperCase()
+const postProduct = async (req = request, res = response) => {    
+    
+    const {status, user, ...body} = req.body
 
     try {        
+        const name = body.name
+        const productFind = await productModel.findOne({name})
 
-        const categoryFind = await categoryModel.findOne({name})
-
-        if  (categoryFind) {
+        if  (productFind) {
             return res.status(400).json({
-                msg : `Ya existe la categoria ${name}`,
+                msg : `Ya existe el producto ${name}`,
             })
         }
 
         const data = {
-            name,
+            ...body,            
+            name : body.name.toUpperCase(),
             user : req.user._id
         }
         
-        const category = new categoryModel(data)
-        await category.save()
+        const prodcut = new productModel(data)
+        await prodcut.save()
         
-        res.staus(201).json({
+        res.status(201).json({
             ok : true,
-            msg : `Nueva categoria ${name}`,
-        })
-
-               
-    } catch (error) {
-        res.json({
-            ok : false,
-            msg : 'postCategory catch',
-           
-        })
-    }    
-}
-
-const putCategory = async (req = request, res = response) => {    
-    const {id} = req.params
-    const {status, user, ...data} = req.body
-    try {
-        data.name = data.name.toUpperCase()
-        data.user = req.user._id    
-        const categoria = await categoryModel
-            .findByIdAndUpdate(id, data,{new:true})
-            
-        res.json({
-            ok : true,
-            msg : 'putCategory',
-            categoria
+            msg : `Nuevo Producto ${name}`,
+            prodcut
         })
 
                
@@ -109,37 +86,65 @@ const putCategory = async (req = request, res = response) => {
         console.log(error);
         res.json({
             ok : false,
-            msg : 'putCategory catch',
+            msg : 'postProdcut catch',
+           
         })
     }    
 }
 
-const deleteCategory = async (req = request, res = response) => {    
+const putProduct = async (req = request, res = response) => {    
+    const {id} = req.params
+    const {status, user, ...data} = req.body
+    try {
+        if (data.name) {
+            data.name = data.name.toUpperCase()
+        }
+        data.user = req.user._id    
+        const product = await productModel
+            .findByIdAndUpdate(id, data,{new:true})
+            
+        res.json({
+            ok : true,
+            msg : 'putProduct',
+            product
+        })
+
+               
+    } catch (error) {
+        console.log(error);
+        res.json({
+            ok : false,
+            msg : 'putProduct catch',
+        })
+    }    
+}
+
+const deleteProduct = async (req = request, res = response) => {    
     const {id} = req.params
     try {
         const data =  { state :false}
-        const categoria = await categoryModel
+        const product = await productModel
         .findByIdAndUpdate(id, data,{new:true})
         res.json({
             ok : true,
-            msg : 'deleteCategory',
-            categoria
+            msg : 'deleteProduct',
+            product
         })
 
                
     } catch (error) {
         res.json({
             ok : false,
-            msg : 'deleteCategory catch',
+            msg : 'deleteProduct catch',
            
         })
     }    
 }
 
 module.exports = {
-    getCategory,
-    getCategoryById,
-    postCategory,
-    putCategory,
-    deleteCategory
+    getProduct,
+    getProductById,
+    postProduct,
+    putProduct,
+    deleteProduct
 }
