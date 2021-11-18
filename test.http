@@ -25,11 +25,11 @@ GET http://localhost:3000/api/category/6189eea5ac74fc6d3c349a78
 
 ###
 POST http://localhost:3000/api/category
-x-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTY1MGVmMDRjYzVkMjI5NGVlNzM0NTUiLCJpYXQiOjE2MzY0Mjg3MDIsImV4cCI6MTYzNjQzNTkwMn0.prxIqRCb1X9wn561E0wPK-QphGn_ZisXp1mEETXUecs
+x-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTY1MGVmMDRjYzVkMjI5NGVlNzM0NTUiLCJpYXQiOjE2MzcxODE2MTcsImV4cCI6MTYzNzE4ODgxN30.EZvh12AxJM0jmc8o3D4l9MqFurKkHLTH5CU5Ys2xaF4
 Content-Type: application/json
 
 {
-    "name" : "Kumis"
+    "name" : "bebes"
 }
 
 ###
@@ -81,3 +81,8 @@ Content-Type: application/json
 DELETE http://localhost:3000/api/product/61956631db94b273da85db6a
 x-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTY1MGVmMDRjYzVkMjI5NGVlNzM0NTUiLCJpYXQiOjE2MzcxODAyNDgsImV4cCI6MTYzNzE4NzQ0OH0.yRbl-s-gKMMZ1PYcSSZrj6vcBUJvwgYaM0Td08B73jU
 Content-Type: application/json
+
+###
+GET http://localhost:3000/api/search/user/fab
+
+
